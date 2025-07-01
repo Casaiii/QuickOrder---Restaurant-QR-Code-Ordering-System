@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { ShoppingCart, Plus, Minus, Clock, MapPin, Phone, Edit2, Star, Utensils } from "lucide-react"
+import { ShoppingCart, Plus, Minus, Clock, MapPin, Phone, Edit2, Star, Coffee } from "lucide-react"
 import Image from "next/image"
 import type { CartItem, MenuItem, Category, Restaurant } from "@/lib/types"
 import { Input } from "@/components/ui/input"
@@ -155,10 +155,10 @@ export default function OrderPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 via-sky-50 to-cyan-50">
+      <div className="flex justify-center items-center min-h-screen sage-bg">
         <div className="text-center">
-          <div className="w-16 h-16 blue-gradient rounded-2xl mx-auto mb-4 flex items-center justify-center animate-pulse">
-            <Utensils className="h-8 w-8 text-white" />
+          <div className="w-16 h-16 earth-gradient rounded-3xl mx-auto mb-4 flex items-center justify-center animate-pulse">
+            <Coffee className="h-8 w-8 text-white" />
           </div>
           <p className="text-gray-600">載入菜單中...</p>
         </div>
@@ -167,17 +167,17 @@ export default function OrderPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-50 to-cyan-50">
+    <div className="min-h-screen sage-bg">
       {/* Header */}
-      <div className="bg-white/80 backdrop-blur-md shadow-sm border-b border-blue-100/50 sticky top-0 z-40">
+      <div className="bg-white/90 backdrop-blur-md shadow-sm border-b border-sage-accent/30 sticky top-0 z-40">
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 blue-gradient rounded-xl flex items-center justify-center">
-                <Utensils className="h-6 w-6 text-white" />
+              <div className="w-12 h-12 earth-gradient rounded-2xl flex items-center justify-center">
+                <Coffee className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">{restaurant?.name}</h1>
+                <h1 className="text-2xl font-bold text-gray-800">{restaurant?.name}</h1>
                 <div className="flex items-center gap-4 mt-1 text-sm text-gray-600">
                   <div className="flex items-center gap-1">
                     <MapPin className="h-3 w-3" />
@@ -202,7 +202,7 @@ export default function OrderPage() {
                   <Input
                     value={editableTableNumber}
                     onChange={(e) => setEditableTableNumber(e.target.value)}
-                    className="w-20 h-8 text-center"
+                    className="w-20 h-8 text-center rounded-2xl"
                     onBlur={() => setIsEditingTable(false)}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
@@ -215,15 +215,17 @@ export default function OrderPage() {
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
-                  <Badge className="blue-gradient text-white px-4 py-2 text-base">桌號 {editableTableNumber}</Badge>
-                  <Button variant="ghost" size="sm" onClick={() => setIsEditingTable(true)}>
+                  <Badge className="earth-gradient text-white px-4 py-2 text-base rounded-full">
+                    桌號 {editableTableNumber}
+                  </Badge>
+                  <Button variant="ghost" size="sm" onClick={() => setIsEditingTable(true)} className="rounded-full">
                     <Edit2 className="h-4 w-4" />
                   </Button>
                 </div>
               )}
               <div className="flex">
                 {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} className="h-4 w-4 fill-blue-400 text-blue-400" />
+                  <Star key={star} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                 ))}
               </div>
             </div>
@@ -237,15 +239,15 @@ export default function OrderPage() {
           <div className="lg:col-span-2">
             {/* Category Tabs */}
             <div className="flex gap-3 mb-8 overflow-x-auto pb-2">
-              {menu.map((category) => (
+              {menu.map((category, index) => (
                 <Button
                   key={category.id}
                   variant={selectedCategory === category.id ? "default" : "outline"}
                   onClick={() => setSelectedCategory(category.id)}
                   className={`whitespace-nowrap rounded-full px-6 py-2 transition-all ${
                     selectedCategory === category.id
-                      ? "blue-gradient text-white shadow-lg"
-                      : "bg-white/80 border-blue-200 hover:bg-blue-50"
+                      ? "earth-button text-white shadow-lg"
+                      : "bg-white/80 border-sage-accent hover:bg-sage-primary/50"
                   }`}
                 >
                   {category.name}
@@ -259,12 +261,12 @@ export default function OrderPage() {
                 .filter((category) => selectedCategory === category.id)
                 .map((category) => (
                   <div key={category.id}>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">{category.name}</h2>
+                    <h2 className="text-2xl font-bold text-gray-800 mb-6">{category.name}</h2>
                     <div className="grid gap-6">
-                      {category.items.map((item) => (
+                      {category.items.map((item, index) => (
                         <Card
                           key={item.id}
-                          className={`premium-card hover:scale-[1.02] transition-all duration-300 ${
+                          className={`${index % 2 === 1 ? "sage-card" : "bg-white"} hover:scale-[1.02] transition-all duration-300 border border-sage-accent/30 rounded-3xl ${
                             !item.isAvailable ? "opacity-60" : ""
                           }`}
                         >
@@ -276,10 +278,10 @@ export default function OrderPage() {
                                   alt={item.name}
                                   width={120}
                                   height={120}
-                                  className="rounded-2xl object-cover"
+                                  className="rounded-3xl object-cover"
                                 />
                                 {!item.isAvailable && (
-                                  <div className="absolute inset-0 bg-black/50 rounded-2xl flex items-center justify-center">
+                                  <div className="absolute inset-0 bg-black/50 rounded-3xl flex items-center justify-center">
                                     <span className="text-white font-medium text-sm">已售完</span>
                                   </div>
                                 )}
@@ -287,15 +289,13 @@ export default function OrderPage() {
                               <div className="flex-1">
                                 <div className="flex justify-between items-start mb-3">
                                   <div>
-                                    <h3 className="font-bold text-xl text-gray-900 mb-2">{item.name}</h3>
+                                    <h3 className="font-bold text-xl text-gray-800 mb-2">{item.name}</h3>
                                     <p className="text-gray-600 text-sm leading-relaxed mb-3">{item.description}</p>
                                     <div className="flex items-center gap-2">
-                                      <span className="text-2xl font-bold blue-gradient bg-clip-text text-transparent">
-                                        NT$ {item.price}
-                                      </span>
+                                      <span className="text-2xl font-bold text-gray-800">NT$ {item.price}</span>
                                       <div className="flex">
                                         {[1, 2, 3, 4, 5].map((star) => (
-                                          <Star key={star} className="h-3 w-3 fill-blue-400 text-blue-400" />
+                                          <Star key={star} className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                                         ))}
                                       </div>
                                     </div>
@@ -315,10 +315,10 @@ export default function OrderPage() {
 
           {/* Cart */}
           <div className="lg:col-span-1">
-            <Card className="premium-card sticky top-24">
+            <Card className="premium-card sticky top-24 rounded-3xl">
               <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-3 text-xl">
-                  <div className="w-8 h-8 blue-gradient rounded-lg flex items-center justify-center">
+                <CardTitle className="flex items-center gap-3 text-xl text-gray-800">
+                  <div className="w-8 h-8 earth-gradient rounded-2xl flex items-center justify-center">
                     <ShoppingCart className="h-4 w-4 text-white" />
                   </div>
                   購物車 ({cart.length})
@@ -327,8 +327,8 @@ export default function OrderPage() {
               <CardContent>
                 {cart.length === 0 ? (
                   <div className="text-center py-12">
-                    <div className="w-16 h-16 bg-blue-50 rounded-2xl mx-auto mb-4 flex items-center justify-center">
-                      <ShoppingCart className="h-8 w-8 text-blue-400" />
+                    <div className="w-16 h-16 sage-primary rounded-3xl mx-auto mb-4 flex items-center justify-center">
+                      <ShoppingCart className="h-8 w-8 text-gray-500" />
                     </div>
                     <p className="text-gray-500">購物車是空的</p>
                     <p className="text-sm text-gray-400 mt-1">選擇您喜愛的餐點吧！</p>
@@ -337,21 +337,21 @@ export default function OrderPage() {
                   <>
                     <div className="space-y-4 mb-6">
                       {cart.map((item, index) => (
-                        <Card key={index} className="border border-blue-100 bg-blue-50/30">
+                        <Card key={index} className="border border-sage-accent/50 sage-card rounded-2xl">
                           <CardContent className="p-4">
                             <div className="flex justify-between items-start mb-3">
                               <div className="flex-1">
-                                <h4 className="font-semibold text-gray-900">{item.menuItem.name}</h4>
+                                <h4 className="font-semibold text-gray-800">{item.menuItem.name}</h4>
                                 <p className="text-sm text-gray-600">
                                   NT$ {item.menuItem.price} x {item.quantity}
                                 </p>
                                 {Object.keys(item.customizations).length > 0 && (
-                                  <Badge variant="secondary" className="mt-1 text-xs">
+                                  <Badge variant="secondary" className="mt-1 text-xs rounded-full">
                                     已客製化
                                   </Badge>
                                 )}
                                 {item.notes && (
-                                  <p className="text-xs text-gray-600 mt-1 bg-white/50 p-2 rounded">
+                                  <p className="text-xs text-gray-600 mt-1 bg-white/50 p-2 rounded-xl">
                                     備註: {item.notes}
                                   </p>
                                 )}
@@ -360,7 +360,7 @@ export default function OrderPage() {
                                 <Button
                                   size="sm"
                                   variant="outline"
-                                  className="w-8 h-8 p-0 rounded-full bg-transparent"
+                                  className="w-8 h-8 p-0 rounded-full bg-transparent border-sage-accent"
                                   onClick={() => updateCartItemQuantity(index, item.quantity - 1)}
                                 >
                                   <Minus className="h-3 w-3" />
@@ -369,7 +369,7 @@ export default function OrderPage() {
                                 <Button
                                   size="sm"
                                   variant="outline"
-                                  className="w-8 h-8 p-0 rounded-full bg-transparent"
+                                  className="w-8 h-8 p-0 rounded-full bg-transparent border-sage-accent"
                                   onClick={() => updateCartItemQuantity(index, item.quantity + 1)}
                                 >
                                   <Plus className="h-3 w-3" />
@@ -390,20 +390,18 @@ export default function OrderPage() {
                         placeholder="請輸入特殊需求或備註..."
                         value={orderNotes}
                         onChange={(e) => setOrderNotes(e.target.value)}
-                        className="mt-2 bg-white/80"
+                        className="mt-2 bg-white/80 rounded-2xl"
                         rows={3}
                       />
                     </div>
 
                     <Separator className="my-6" />
                     <div className="flex justify-between items-center mb-6">
-                      <span className="text-lg font-semibold text-gray-900">總計</span>
-                      <span className="text-2xl font-bold blue-gradient bg-clip-text text-transparent">
-                        NT$ {getTotalAmount()}
-                      </span>
+                      <span className="text-lg font-semibold text-gray-800">總計</span>
+                      <span className="text-2xl font-bold text-gray-800">NT$ {getTotalAmount()}</span>
                     </div>
                     <Button
-                      className="w-full blue-gradient text-white hover:scale-105 transition-transform shadow-lg py-3 text-lg"
+                      className="w-full earth-button text-white rounded-2xl shadow-lg py-3 text-lg"
                       onClick={submitOrder}
                       disabled={cart.length === 0}
                     >

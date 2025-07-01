@@ -5,58 +5,59 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 17.6%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 17.6%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 17.6%;
+    --primary: 32 25% 45%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 120 20% 95%;
+    --secondary-foreground: 0 0% 17.6%;
+    --muted: 120 20% 95%;
+    --muted-foreground: 0 0% 42%;
+    --accent: 120 20% 95%;
+    --accent-foreground: 0 0% 17.6%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.75rem;
+    --destructive-foreground: 0 0% 98%;
+    --border: 120 15% 90%;
+    --input: 120 15% 90%;
+    --ring: 32 25% 45%;
+    --radius: 1rem;
 
-    /* Custom blue theme colors */
-    --blue-primary: 221.2 83.2% 53.3%;
-    --blue-secondary: 210 40% 96%;
-    --blue-accent: 217.2 91.2% 59.8%;
-    --blue-light: 214.3 31.8% 91.4%;
-    --blue-cream: 210 40% 98%;
-    --blue-gradient-start: 217.2 91.2% 59.8%;
-    --blue-gradient-end: 221.2 83.2% 53.3%;
-    --light-blue-gradient-start: 199 89% 48%;
-    --light-blue-gradient-end: 217.2 91.2% 59.8%;
+    /* Custom sage green and earth tone colors */
+    --sage-primary: 120 20% 95%;
+    --sage-secondary: 120 25% 92%;
+    --sage-accent: 120 30% 88%;
+    --sage-light: 120 15% 97%;
+    --earth-primary: 32 25% 45%;
+    --earth-secondary: 28 20% 55%;
+    --earth-light: 35 15% 85%;
+    --warm-gray: 0 0% 42%;
+    --light-gray: 0 0% 62%;
+    --accent-yellow: 45 95% 58%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --background: 0 0% 17.6%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 17.6%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 17.6%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 32 25% 55%;
+    --primary-foreground: 0 0% 17.6%;
+    --secondary: 120 10% 20%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 120 10% 20%;
+    --muted-foreground: 0 0% 62%;
+    --accent: 120 10% 20%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 94.1%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 120 10% 20%;
+    --input: 120 10% 20%;
+    --ring: 32 25% 55%;
   }
 }
 
@@ -71,36 +72,45 @@
 }
 
 @layer components {
-  .blue-gradient {
-    background: linear-gradient(135deg, hsl(var(--blue-gradient-start)), hsl(var(--blue-gradient-end)));
+  .sage-gradient {
+    background: linear-gradient(135deg, hsl(var(--sage-light)), hsl(var(--sage-primary)));
   }
 
-  .light-blue-gradient {
-    background: linear-gradient(135deg, hsl(var(--light-blue-gradient-start)), hsl(var(--light-blue-gradient-end)));
+  .earth-gradient {
+    background: linear-gradient(135deg, hsl(var(--earth-secondary)), hsl(var(--earth-primary)));
   }
 
-  .blue-card {
-    background: linear-gradient(135deg, hsl(var(--blue-primary)), hsl(var(--blue-secondary)));
+  .sage-card {
+    background: hsl(var(--sage-primary));
     backdrop-filter: blur(10px);
   }
 
   .glass-effect {
     backdrop-filter: blur(20px);
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid hsl(var(--sage-accent));
   }
 
-  .blue-shadow {
-    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1), 0 8px 16px rgba(59, 130, 246, 0.06);
+  .sage-shadow {
+    box-shadow: 0 20px 40px rgba(139, 155, 143, 0.1), 0 8px 16px rgba(139, 155, 143, 0.06);
   }
 
   .premium-card {
-    background: linear-gradient(145deg, #ffffff, #f8fafc);
-    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.08), 0 4px 16px rgba(59, 130, 246, 0.04);
-    border: 1px solid rgba(219, 234, 254, 0.8);
+    background: linear-gradient(145deg, #ffffff, #fafbfa);
+    box-shadow: 0 8px 32px rgba(139, 155, 143, 0.08), 0 4px 16px rgba(139, 155, 143, 0.04);
+    border: 1px solid hsl(var(--sage-accent));
   }
 
-  .ocean-gradient {
-    background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 25%, #81d4fa 50%, #4fc3f7 75%, #29b6f6 100%);
+  .sage-bg {
+    background: hsl(var(--sage-light));
+  }
+
+  .earth-button {
+    background: hsl(var(--earth-primary));
+    color: white;
+  }
+
+  .earth-button:hover {
+    background: hsl(var(--earth-secondary));
   }
 }
